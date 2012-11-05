@@ -11,9 +11,10 @@
 		var o = {
 			
 			'breakpoint'				: 768,
-			'zipper_under'			: 'entry',
-			'number_to_zipper'	: 2,
-			'nth_articles'			: 1
+			'zipper_under'			: '.entry',
+			'number_to_zipper'	: 1,
+			'nth_articles'			: 1,
+			'sidebar_container' : '.side-bar'
 						
 		}
 		
@@ -22,25 +23,44 @@
 		
 		
 		function zipper(){
+		
 			var windowWidth = $(window).width();
+			var zipperableSections = $this.detach();
+			var zipperUnder = $(o.zipper_under);
 			
-			if (windowWidth <= o.breakpoint) {
+			if (windowWidth <= o.breakpoint) { 
 			
-				//build regions to insert sidebar elements
-				$('.' + o.zipper_under + ':nth-child(' + o.nth_articles + 'n)').after('<div class="rz-zipperto" />');
-				
-				
-				var insertSections = $('.rz-zipperto');
-				var detachedSections = $this.detach();
-				
-				for(var i = 0; i<detachedSections.length; i++){
-					$(insertSections[i]).append(detachedSections[i]);
+				//zip
+				$('.rz-zipperable').remove();
+				for(var i = 0; i < zipperableSections.length; i++){
+					if($('.rz-zipperto').length < zipperableSections.length){
+						$(zipperUnder[i]).after('<div class="rz-zipperto" />');
+					}
+					$(zipperUnder[i]).next().append(zipperableSections[i]);
 				}
 			
+			} else { 
+				
+				//unzip
+				$('.rz-zipperto').remove();
+				var zipperHTML = '';
+				for(var i = 0; i < zipperableSections.length; i++){
+					zipperHTML += zipperableSections[i].outerHTML;
+				}
+				if(!$('.rz-zipperable', o.sidebar_container).length != 0){
+				
+					$(o.sidebar_container).prepend(zipperHTML);
+				}
+				
+				console.log($('.rz-zipperable', o.sidebar_container).length !=0);
+				console.log(zipperHTML);
+				
+				
 			}
 			
 		} //end zipper function
 		
+		//
 		zipper();
 		$(window).resize(function(){
 			zipper();
