@@ -11,7 +11,7 @@
 			'breakpoint'				: 768,
 			'zipper_under'			: '.entry',
 			'number_to_zipper'	: 1,
-			'nth_articles'			: 1,
+			'nth_articles'			: 2,
 			'sidebar_container' : '.side-bar'
 						
 		}
@@ -27,14 +27,15 @@
 			var zipperUnder = $(o.zipper_under);
 			
 			if (windowWidth <= o.breakpoint) { 
-			
+				
+				var nthArticles = o.nth_articles;
 				//zip
 				$('.rz-zipperable').remove();
-				for(var i = 0; i < zipperableSections.length; i++){
+				for(var i = 1; i <= zipperableSections.length; i++){
 					if($('.rz-zipperto').length < zipperableSections.length){
-						$(zipperUnder[i]).after('<div class="rz-zipperto" />');
+						$(zipperUnder[i * nthArticles]).after('<div class="rz-zipperto" />');
 					}
-					$(zipperUnder[i]).next().append(zipperableSections[i]);
+					$(zipperUnder[i * nthArticles]).next().append(zipperableSections[i-1]);
 				}
 			
 			} else { 
