@@ -1,7 +1,5 @@
 (function($) {
-	
-	//PRASCO HOME PAGE SLIDER
-	
+		
 	$.fn.respondZipper = function(newO) {
 	
 		var $this = $(this);
