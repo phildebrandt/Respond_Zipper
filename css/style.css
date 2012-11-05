@@ -1,0 +1,73 @@
+@import 'normalize.css';
+
+/* default styles */
+
+	* {
+		box-sizing: border-box;
+	}
+	
+	body { 
+		background: #ccc; 
+		padding: 10px; 
+	}
+	
+	.page-wrap { 
+		background: #eee; 
+		max-width: 1004px; 
+		margin: 0 auto; 
+		padding: 10px 10px 0;
+		overflow: hidden;
+	}
+	
+	.main-content { 
+		float: left; 
+		width: 65%;
+		padding: 0 10px 0 0;
+	}
+	
+	.main-content .entry { 
+		background: orange; 
+		color: #fff; 
+		padding: 20px; 
+		margin: 0 0 10px;
+	}
+	
+	.side-bar { 
+		float: right; 
+		width: 35%;
+		background: grey;
+		padding: 10px 10px 0;
+	}
+	
+	.side-bar-entry { 
+		width: auto; 
+		padding: 20px; 
+		margin: 0 0 10px; 
+		background: #000;
+		color: #fff;
+	}
+	
+	.rz-zipperto {
+		background: grey;
+		margin: 0 0 10px;
+		padding: 10px 10px 0;
+		overflow: hidden;
+	}
+	
+
+/* styles */
+@media screen and (max-width: 768px){
+	.main-content {
+		float: none;
+		width: auto;
+	}
+	.side-bar {
+		float: none;
+		width: auto;
+	}
+}
+
+/* styles */
+@media screen and (max-width: 480px){
+	
+}
