@@ -10,8 +10,8 @@
 			
 			'breakpoint'				: 768,
 			'zipper_under'			: '.entry',
-			'number_to_zipper'	: 1,
-			'nth_articles'			: 2,
+			'number_to_zipper'	: 2,
+			'nth_articles'			: 3,
 			'sidebar_container' : '.side-bar'
 						
 		}
@@ -19,42 +19,49 @@
 		//extend default options
 		$.extend(o, newO);
 		
+		var sidebarHTML = $(o.sidebar_container).html();
 		
 		function zipper(){
 		
 			var windowWidth = $(window).width();
-			var zipperableSections = $this.detach();
+			var zipperableSections = $this;
 			var zipperUnder = $(o.zipper_under);
 			
-			if (windowWidth <= o.breakpoint) { 
-				
-				var nthArticles = o.nth_articles;
-				//zip
-				$('.rz-zipperable').remove();
-				for(var i = 1; i <= zipperableSections.length; i++){
-					if($('.rz-zipperto').length < zipperableSections.length){
-						$(zipperUnder[i * nthArticles]).after('<div class="rz-zipperto" />');
-					}
-					$(zipperUnder[i * nthArticles]).next().append(zipperableSections[i-1]);
-				}
 			
+			//zip everything up!
+			if (windowWidth <= o.breakpoint) {
+				
+				var availableZipperTo = Math.floor($(o.zipper_under).length / o.nth_articles);
+				var neededZipperTo = Math.ceil(zipperableSections.length / o.number_to_zipper);
+				var zipperableSectionsToRemove = availableZipperTo * o.number_to_zipper;
+				
+				for (var i = 1; i <= zipperableSections.length; i++) {
+					
+					var zipperToPosition = (i * o.nth_articles) - 1;
+					var zipperTo = $('.rz-zipperto');
+					var zipperToIndex = Math.floor((i-1) / o.number_to_zipper);
+					var availableZipperToCheck = zipperTo.length < availableZipperTo;
+					var neededZipperToCheck = zipperTo.length < neededZipperTo;
+					var zipperableSectionsToRemoveCheck = zipperableSections.length - $(zipperableSections.selector, o.sidebar_container).length < zipperableSectionsToRemove;
+
+					if (availableZipperToCheck && neededZipperToCheck) {
+						$(zipperUnder[zipperToPosition]).after('<div class="rz-zipperto" />');
+					}
+					
+					if (i <= zipperableSectionsToRemove && zipperableSectionsToRemoveCheck) {
+						$(zipperableSections.selector + ':eq(0)', o.sidebar_container).remove()
+					}
+										
+					$('.rz-zipperto:eq(' + zipperToIndex + ')').append(zipperableSections[i-1]);
+					
+				}
+				
+			//unzip everything!
 			} else { 
 				
-				//unzip
 				$('.rz-zipperto').remove();
-				var zipperHTML = '';
-				for(var i = 0; i < zipperableSections.length; i++){
-					zipperHTML += zipperableSections[i].outerHTML;
-				}
-				if(!$('.rz-zipperable', o.sidebar_container).length != 0){
-				
-					$(o.sidebar_container).prepend(zipperHTML);
-				}
-				
-				console.log($('.rz-zipperable', o.sidebar_container).length !=0);
-				console.log(zipperHTML);
-				
-				
+				$(o.sidebar_container).html(sidebarHTML);
+								
 			}
 			
 		} //end zipper function
