@@ -10,8 +10,8 @@
 			
 			'breakpoint'				: 768,
 			'zipper_under'			: '.entry',
-			'number_to_zipper'	: 2,
-			'nth_articles'			: 3,
+			'number_to_zipper'	: 1,
+			'nth_articles'			: 2,
 			'sidebar_container' : '.side-bar'
 						
 		}
@@ -43,17 +43,20 @@
 					var availableZipperToCheck = zipperTo.length < availableZipperTo;
 					var neededZipperToCheck = zipperTo.length < neededZipperTo;
 					var zipperableSectionsToRemoveCheck = zipperableSections.length - $(zipperableSections.selector, o.sidebar_container).length < zipperableSectionsToRemove;
+					var zipperToLastCheck = (zipperToIndex + 1) * o.nth_articles < $(o.zipper_under).length;
 
 					if (availableZipperToCheck && neededZipperToCheck) {
 						$(zipperUnder[zipperToPosition]).after('<div class="rz-zipperto" />');
 					}
 					
-					if (i <= zipperableSectionsToRemove && zipperableSectionsToRemoveCheck) {
+					if (i <= zipperableSectionsToRemove && zipperableSectionsToRemoveCheck && zipperToLastCheck) {
 						$(zipperableSections.selector + ':eq(0)', o.sidebar_container).remove()
 					}
-										
-					$('.rz-zipperto:eq(' + zipperToIndex + ')').append(zipperableSections[i-1]);
 					
+					if (zipperToLastCheck) {
+						$('.rz-zipperto:eq(' + zipperToIndex + ')').append(zipperableSections[i-1]);
+					}
+					console.log(zipperToLastCheck);
 				}
 				
 			//unzip everything!
