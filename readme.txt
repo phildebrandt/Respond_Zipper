@@ -38,29 +38,30 @@ Usage
 
 <aside>
 
--- JS --
+-- jQuery --
 
 $('.rz-zipperable').respondZipper({
 
 	// dimension to zipper
 	// default 768
-	'breakpoint'				: 768,
+	'breakpoint': 768,
 	
 	// element to place zipper target under (css class)
 	// default '.entry'			
-	'zipper_under'			: '.entry',
+	'zipper_under': '.entry',
 	
 	// nth element for zipper target
 	// default 1			
-	'nth_zipper_under'	: 1,
+	'nth_zipper_under': 1,
 	
 	// number of sidebar sections to zipper per target
 	// default 1		
-	'number_to_zipper'	: 1,
+	'number_to_zipper': 1,
 	
 	// sidebar container (css class)
 	// default '.side-bar'							
-	'sidebar_container' : '.side-bar'					
+	'sidebar_container': '.side-bar'	
+					
 });
 
 
