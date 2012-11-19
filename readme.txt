@@ -41,11 +41,26 @@ Usage
 -- JS --
 
 $('.rz-zipperable').respondZipper({
-	'breakpoint'				: 768,								//dimension to zipper | default 768
-	'zipper_under'			: '.entry',						//element to place zipper target under (css class) | default '.entry'
-	'nth_zipper_under'	: 1,									//nth element for zipper target | default 1
-	'number_to_zipper'	: 1,									//number of sidebar sections to zipper per target | default 1
-	'sidebar_container' : '.side-bar'					//sidebar container (css class) | default '.side-bar'
+
+	// dimension to zipper
+	// default 768
+	'breakpoint'				: 768,
+	
+	// element to place zipper target under (css class)
+	// default '.entry'			
+	'zipper_under'			: '.entry',
+	
+	// nth element for zipper target
+	// default 1			
+	'nth_zipper_under'	: 1,
+	
+	// number of sidebar sections to zipper per target
+	// default 1		
+	'number_to_zipper'	: 1,
+	
+	// sidebar container (css class)
+	// default '.side-bar'							
+	'sidebar_container' : '.side-bar'					
 });
 
 
