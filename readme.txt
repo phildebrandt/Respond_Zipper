@@ -2,7 +2,7 @@ Respond Zipper is a jQuery plugin that is an attempt to solve content folding fo
 
 ----
 
-Demo: phildebrandt.com/respond-zipper
+Demo: http://phildebrandt.com/respond-zipper
 
 ----
 ----
