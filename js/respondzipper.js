@@ -11,7 +11,7 @@
 			'breakpoint'				: 768,
 			'zipper_under'			: '.entry',
 			'number_to_zipper'	: 1,
-			'nth_articles'			: 1,
+			'nth_zipper_under'	: 1,
 			'sidebar_container' : '.side-bar'
 						
 		}
@@ -39,19 +39,19 @@
 			if (windowWidth <= o.breakpoint) {
 			
 				
-				var availableZipperTo = Math.ceil(($(o.zipper_under).length / o.nth_articles) - 1);
+				var availableZipperTo = Math.ceil(($(o.zipper_under).length / o.nth_zipper_under) - 1);
 				var neededZipperToNum = Math.ceil(zipperableSections.length / o.number_to_zipper);
 				var zipperableSectionsToRemove = availableZipperTo * o.number_to_zipper;
 
 				for (var i = 1; i <= zipperableSections.length; i++) {
 					
-					var zipperToPosition = (i * o.nth_articles) - 1;
+					var zipperToPosition = (i * o.nth_zipper_under) - 1;
 					var zipperTo = $('.rz-zipperto');
 					var zipperToIndex = Math.floor((i-1) / o.number_to_zipper);
 					var availableZipperToCheck = zipperTo.length < availableZipperTo;
 					var neededZipperToCheck = zipperTo.length < neededZipperToNum;
 					var zipperableSectionsToRemoveCheck = zipperableSections.length - $(zipperableSections.selector, o.sidebar_container).length < zipperableSectionsToRemove;
-					var zipperToLastCheck = (zipperToIndex + 1) * o.nth_articles < $(o.zipper_under).length;
+					var zipperToLastCheck = (zipperToIndex + 1) * o.nth_zipper_under < $(o.zipper_under).length;
 
 					if (availableZipperToCheck && neededZipperToCheck && zipperToLastCheck) {
 						$(zipperUnder[zipperToPosition]).after('<div class="rz-zipperto" />');
